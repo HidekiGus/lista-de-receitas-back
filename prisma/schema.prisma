@@ -1,0 +1,79 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Users {
+  id           Int            @id @default(autoincrement())
+  name         String
+  email        String         @unique
+  password     String
+  recipes      Recipes[]
+  likes        Likes[]
+  savedRecipes SavedRecipes[]
+
+  @@map("users")
+}
+
+model Recipes {
+  id           Int            @id @default(autoincrement())
+  title        String
+  userId       Int
+  user         Users          @relation(fields: [userId], references: [id])
+  likes        Likes[]
+  savedRecipes SavedRecipes[]
+  methodSteps  MethodSteps[]
+  ingredients  Ingredients[]
+  createdAt    DateTime       @default(now())
+
+  @@map("recipes")
+}
+
+model Likes {
+  id        Int      @id @default(autoincrement())
+  userId    Int
+  user      Users    @relation(fields: [userId], references: [id])
+  recipeId  Int
+  recipe    Recipes  @relation(fields: [recipeId], references: [id])
+  createdAt DateTime @default(now())
+
+  @@map("likes")
+}
+
+model SavedRecipes {
+  id        Int      @id @default(autoincrement())
+  userId    Int
+  user      Users    @relation(fields: [userId], references: [id])
+  recipeId  Int
+  recipe    Recipes  @relation(fields: [recipeId], references: [id])
+  createdAt DateTime @default(now())
+
+  @@map("savedRecipes")
+}
+
+model MethodSteps {
+  id          Int      @id @default(autoincrement())
+  recipeId    Int
+  recipe      Recipes  @relation(fields: [recipeId], references: [id])
+  description String
+  createdAt   DateTime @default(now())
+
+  @@map("methodSteps")
+}
+
+model Ingredients {
+  id          Int      @id @default(autoincrement())
+  recipeId    Int
+  recipe      Recipes  @relation(fields: [recipeId], references: [id])
+  description String
+  createdAt   DateTime @default(now())
+
+  @@map("ingredients")
+}
