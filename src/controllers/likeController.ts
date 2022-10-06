@@ -1,0 +1,9 @@
+import { Request, Response } from 'express';
+import * as likeService from '../services/likeService';
+
+export async function likeRecipe(req: Request, res: Response) {
+  const { authorization } = req.headers;
+  const { recipeId } = req.params;
+  const isLiked = await likeService.likeRecipe(authorization, Number(recipeId));
+  res.status(201).send(isLiked);
+}
