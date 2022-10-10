@@ -6,8 +6,8 @@ export async function createRecipe(
   image: string,
   portions: number,
   time: number,
-  ingredients: string[],
-  method: string[],
+  ingredients: string,
+  method: string,
   authorization: string
 ) {
   const token = authorization.replace('Bearer ', '');
@@ -15,15 +15,18 @@ export async function createRecipe(
   const recipeId = await recipeRepository.createRecipe(
     title,
     image,
-    portions,
-    time,
+    Number(portions),
+    Number(time),
     userId
   );
-  for (let i = 0; i < ingredients.length; i++) {
-    await recipeRepository.createIngredient(ingredients[i], recipeId);
+
+  const ingredientList = ingredients.split('\n');
+  const methodList = method.split('\n');
+  for (let i = 0; i < ingredientList.length; i++) {
+    await recipeRepository.createIngredient(ingredientList[i], recipeId);
   }
-  for (let m = 0; m < method.length; m++) {
-    await recipeRepository.createMethodStep(method[m], recipeId);
+  for (let m = 0; m < methodList.length; m++) {
+    await recipeRepository.createMethodStep(methodList[m], recipeId);
   }
 }
 
@@ -43,4 +46,19 @@ export async function getAllRecipes(authorization: string) {
   }
 
   return newArray;
+}
+
+export async function getRecipeById(
+  id: number,
+  authorization: string | undefined
+) {
+  const recipeData = await recipeRepository.getRecipeById(id);
+  const token = authorization.replace('Bearer ', '');
+  if (token === 'null') {
+    return recipeData;
+  } else {
+    const userId = await resolveJWT(token);
+    const likesData = await recipeRepository.getLikesByUserId(userId, id);
+    return { ...recipeData, isLiked: likesData.length !== 0 };
+  }
 }

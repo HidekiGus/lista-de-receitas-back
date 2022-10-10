@@ -20,3 +20,15 @@ export async function likeRecipe(userId: number, recipeId: number) {
     return true;
   }
 }
+
+export async function getLikedPosts(userId: number) {
+  const likes = await client.likes.findMany({ where: { userId } });
+  const likedPosts = [];
+  for (let i = 0; i < likes.length; i++) {
+    const recipeId = likes[i].recipeId;
+    const data = await client.recipes.findUnique({ where: { id: recipeId } });
+    likedPosts.push({ ...data, isLiked: true });
+  }
+  console.log(likedPosts);
+  return likedPosts;
+}

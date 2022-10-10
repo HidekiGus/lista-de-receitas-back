@@ -11,5 +11,6 @@ recipeRouter.post(
   recipeController.createRecipe
 );
 recipeRouter.get('/recipes', recipeController.getAllRecipes);
+recipeRouter.get('/recipes/:id', recipeController.getRecipeById);
 
 export default recipeRouter;

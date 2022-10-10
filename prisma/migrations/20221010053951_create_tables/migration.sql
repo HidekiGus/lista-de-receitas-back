@@ -32,16 +32,6 @@ CREATE TABLE "likes" (
 );
 
 -- CreateTable
-CREATE TABLE "savedRecipes" (
-    "id" SERIAL NOT NULL,
-    "userId" INTEGER NOT NULL,
-    "recipeId" INTEGER NOT NULL,
-    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
-
-    CONSTRAINT "savedRecipes_pkey" PRIMARY KEY ("id")
-);
-
--- CreateTable
 CREATE TABLE "methodSteps" (
     "id" SERIAL NOT NULL,
     "recipeId" INTEGER NOT NULL,
@@ -75,12 +65,6 @@ ALTER TABLE "likes" ADD CONSTRAINT "likes_recipeId_fkey" FOREIGN KEY ("recipeId"
 
 -- AddForeignKey
 ALTER TABLE "likes" ADD CONSTRAINT "likes_userId_fkey" FOREIGN KEY ("userId") REFERENCES "users"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "savedRecipes" ADD CONSTRAINT "savedRecipes_recipeId_fkey" FOREIGN KEY ("recipeId") REFERENCES "recipes"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "savedRecipes" ADD CONSTRAINT "savedRecipes_userId_fkey" FOREIGN KEY ("userId") REFERENCES "users"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "methodSteps" ADD CONSTRAINT "methodSteps_recipeId_fkey" FOREIGN KEY ("recipeId") REFERENCES "recipes"("id") ON DELETE RESTRICT ON UPDATE CASCADE;

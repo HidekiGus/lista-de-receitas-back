@@ -65,6 +65,31 @@ export async function getAllRecipes() {
   });
 }
 
+export async function getRecipeById(id: number) {
+  const ingredients = await client.ingredients.findMany({
+    where: {
+      recipeId: id,
+    },
+    orderBy: {
+      createdAt: 'asc',
+    },
+  });
+  const method = await client.methodSteps.findMany({
+    where: {
+      recipeId: id,
+    },
+    orderBy: {
+      createdAt: 'asc',
+    },
+  });
+  const recipeData = await client.recipes.findUnique({
+    where: {
+      id,
+    },
+  });
+  return { ...recipeData, ingredients, method };
+}
+
 export async function getLikesByUserId(userId: number, recipeId: number) {
   return await client.likes.findMany({
     where: {
