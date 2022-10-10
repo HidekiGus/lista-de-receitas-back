@@ -6,7 +6,7 @@
   "scripts": {
     "build": "tsc",
     "test": "npx dotenv-cli -e .env.test jest -i",
-    "start": "node ./src/server.js && npx prisma migrate deploy",
+    "start": "ts-node ./src/server.ts && npx prisma migrate deploy",
     "dev": "npx nodemon ./src/server.ts"
   },
   "repository": {
