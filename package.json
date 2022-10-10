@@ -4,8 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "build": "tsc",
     "test": "npx dotenv-cli -e .env.test jest -i",
-    "start": "npx ts-node ./src/server.ts && npx prisma migrate deploy",
+    "start": "node ./src/server.js && npx prisma migrate deploy",
     "dev": "npx nodemon ./src/server.ts"
   },
   "repository": {
