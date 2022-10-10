@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "npx dotenv-cli -e .env.test jest -i",
-    "start": "npx ts-node ./src/server.ts",
+    "start": "npx ts-node ./src/server.ts && npx prisma migrate deploy",
     "dev": "npx nodemon ./src/server.ts"
   },
   "repository": {
