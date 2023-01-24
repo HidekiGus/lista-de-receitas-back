@@ -20,3 +20,7 @@ export async function login(req: Request, res: Response) {
   const token = await userService.login(email, password);
   res.status(200).send(token);
 }
+
+export async function getStatusCheck(req: Request, res: Response) {
+  res.status(200).send('Welcome to the livro-de-receitas API!');
+}

@@ -13,6 +13,7 @@ userRouter.post(
   userController.createUser
 );
 userRouter.post('/login', validateSchema(userSchema), userController.login);
+userRouter.get('/', userController.getStatusCheck);
 //#TODO:
 userRouter.get('/users', getUsers);
 
