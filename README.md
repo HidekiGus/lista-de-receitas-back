@@ -3,6 +3,8 @@
 
 ## 📗 Bem-vindo ao Livro de Receitas!
 
+💻 Para visitar o projeto, acesse livrodereceitas.app
+
 
 ### Tecnologias utilizadas
 
@@ -15,6 +17,8 @@
 ![npm](https://img.shields.io/badge/npm-CB3837?style=for-the-badge&logo=npm&logoColor=white)
 ![Prisma](https://img.shields.io/badge/Prisma-3982CE?style=for-the-badge&logo=Prisma&logoColor=white)
 ![Jest](https://img.shields.io/badge/Jest-C21325?style=for-the-badge&logo=jest&logoColor=white)
+![Google Cloud](https://img.shields.io/badge/GoogleCloud-%234285F4.svg?style=for-the-badge&logo=google-cloud&logoColor=white)
+![Render](https://img.shields.io/badge/Render-%46E3B7.svg?style=for-the-badge&logo=render&logoColor=white)
 
 ❗ Este é o back-end do projeto. Para acessar o front-end, acesse o repositório [aqui](https://github.com/HidekiGus/livro-de-receitas-front). 
 
