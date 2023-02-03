@@ -3,7 +3,7 @@
 
 ## 📗 Bem-vindo ao Livro de Receitas!
 
-💻 Para visitar o projeto, acesse livrodereceitas.app
+💻 Para visitar o projeto, acesse [livrodereceitas.app]
 
 
 ### Tecnologias utilizadas
