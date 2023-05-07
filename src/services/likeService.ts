@@ -18,11 +18,11 @@ export async function getLikes(authorization: string) {
       Number(userId),
       recipeId
     );
-    if (likesData.length !== 0) {
-      likedPosts.push({ ...likedPostsData[i], isLiked: true });
-    } else {
-      likedPosts.push({ ...likedPostsData[i], isLiked: false });
-    }
+    // if (likesData.length !== 0) {
+    //   likedPosts.push({ ...likedPostsData[i], isLiked: true });
+    // } else {
+    //   likedPosts.push({ ...likedPostsData[i], isLiked: false });
+    // }
   }
   return likedPosts;
 }

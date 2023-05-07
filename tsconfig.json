@@ -4,6 +4,7 @@
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "strict": false,
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    "types": ["mongoose"]
   }
 }

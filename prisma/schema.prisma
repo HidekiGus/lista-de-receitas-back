@@ -3,12 +3,12 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
+  provider = "mongodb"
   url      = env("DATABASE_URL")
 }
 
 model Users {
-  id       Int       @id @default(autoincrement())
+  id       String    @id @default(auto()) @map("_id") @db.ObjectId
   name     String
   email    String    @unique
   password String
@@ -19,9 +19,9 @@ model Users {
 }
 
 model Recipes {
-  id          Int           @id @default(autoincrement())
+  id          String        @id @default(auto()) @map("_id") @db.ObjectId
   title       String
-  userId      Int
+  userId      String        @db.ObjectId
   createdAt   DateTime      @default(now())
   image       String
   portions    Int
@@ -36,9 +36,9 @@ model Recipes {
 }
 
 model Likes {
-  id        Int      @id @default(autoincrement())
-  userId    Int
-  recipeId  Int
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  userId    String   @db.ObjectId
+  recipeId  String   @db.ObjectId
   createdAt DateTime @default(now())
   recipe    Recipes  @relation(fields: [recipeId], references: [id])
   user      Users    @relation(fields: [userId], references: [id])
@@ -47,8 +47,8 @@ model Likes {
 }
 
 model MethodSteps {
-  id          Int      @id @default(autoincrement())
-  recipeId    Int
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  recipeId    String   @db.ObjectId
   description String
   createdAt   DateTime @default(now())
   recipe      Recipes  @relation(fields: [recipeId], references: [id])
@@ -57,8 +57,8 @@ model MethodSteps {
 }
 
 model Ingredients {
-  id          Int      @id @default(autoincrement())
-  recipeId    Int
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  recipeId    String   @db.ObjectId
   description String
   createdAt   DateTime @default(now())
   recipe      Recipes  @relation(fields: [recipeId], references: [id])

@@ -35,15 +35,15 @@ export async function getAllRecipes(authorization: string) {
   const data = await recipeRepository.getAllRecipes();
   const newArray = [];
 
-  for (let i = 0; i < data.length; i++) {
-    const recipeId = data[i].id;
-    const likesData = await recipeRepository.getLikesByUserId(userId, recipeId);
-    if (likesData.length !== 0) {
-      newArray.push({ ...data[i], isLiked: true });
-    } else {
-      newArray.push({ ...data[i], isLiked: false });
-    }
-  }
+  // for (let i = 0; i < data.length; i++) {
+  //   const recipeId = data[i].id;
+  //   const likesData = await recipeRepository.getLikesByUserId(userId, recipeId);
+  //   // if (likesData.length !== 0) {
+  //   newArray.push({ ...data[i], isLiked: true });
+  // } else {
+  //   newArray.push({ ...data[i], isLiked: false });
+  // }
+  //}
 
   return newArray;
 }
@@ -59,6 +59,7 @@ export async function getRecipeById(
   } else {
     const userId = await resolveJWT(token);
     const likesData = await recipeRepository.getLikesByUserId(userId, id);
-    return { ...recipeData, isLiked: likesData.length !== 0 };
+    //return { ...recipeData, isLiked: likesData.length !== 0 };
+    return true;
   }
 }
