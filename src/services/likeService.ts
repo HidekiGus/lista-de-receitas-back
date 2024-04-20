@@ -2,12 +2,17 @@ import * as likeRepository from '../repositories/likeRepository';
 import * as recipeRepository from '../repositories/recipeRepository';
 import { resolveJWT } from '../utils/jwtResolver';
 
-export async function likeRecipe(authorization: string, recipeId: number) {
+/* export async function likeRecipe(authorization: string, recipeId: number) {
   const userId = await resolveJWT(authorization);
   return await likeRepository.likeRecipe(userId, recipeId);
+} */
+
+export async function likeRecipe() {
+  console.log("likeRecipe pass");
+  return true;
 }
 
-export async function getLikes(authorization: string) {
+/* export async function getLikes(authorization: string) {
   const token = authorization.replace('Bearer ', '');
   const userId = await resolveJWT(token);
   const likedPosts = [];
@@ -25,4 +30,9 @@ export async function getLikes(authorization: string) {
     }
   }
   return likedPosts;
+} */
+
+export async function getLikes() {
+  console.log("getLikes pass");
+  return true;
 }

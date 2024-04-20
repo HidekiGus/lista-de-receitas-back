@@ -1,7 +1,7 @@
 import { resolveJWT } from '../utils/jwtResolver';
 import * as recipeRepository from '../repositories/recipeRepository';
 
-export async function createRecipe(
+/* export async function createRecipe(
   title: string,
   image: string,
   portions: number,
@@ -28,9 +28,19 @@ export async function createRecipe(
   for (let m = 0; m < methodList.length; m++) {
     await recipeRepository.createMethodStep(methodList[m], recipeId);
   }
+} */
+
+export async function createRecipe(title: string,
+  image: string,
+  portions: number,
+  time: number,
+  ingredients: string,
+  method: string) {
+  console.log("createRecipe pass");
+  return true;
 }
 
-export async function getAllRecipes(authorization: string) {
+/* export async function getAllRecipes(authorization: string) {
   const userId = await resolveJWT(authorization);
   const data = await recipeRepository.getAllRecipes();
   const newArray = [];
@@ -46,13 +56,19 @@ export async function getAllRecipes(authorization: string) {
   }
 
   return newArray;
+} */
+
+export async function getAllRecipes() {
+  console.log("getAllRecipes pass");
+  return true;
 }
 
-export async function getRecipeById(
+/* export async function getRecipeById(
   id: number,
   authorization: string | undefined
 ) {
   const recipeData = await recipeRepository.getRecipeById(id);
+  console.log("passou aqui");
   const token = authorization.replace('Bearer ', '');
   if (token === 'null') {
     return recipeData;
@@ -61,4 +77,9 @@ export async function getRecipeById(
     const likesData = await recipeRepository.getLikesByUserId(userId, id);
     return { ...recipeData, isLiked: likesData.length !== 0 };
   }
+} */
+
+export async function getRecipeById() {
+  console.log("getRecipeById pass");
+  return true;
 }

@@ -2,14 +2,16 @@ import { Request, Response } from 'express';
 import * as likeService from '../services/likeService';
 
 export async function likeRecipe(req: Request, res: Response) {
-  const { authorization } = req.headers;
+  //const { authorization } = req.headers;
   const { recipeId } = req.params;
-  const isLiked = await likeService.likeRecipe(authorization, Number(recipeId));
-  res.status(201).send(isLiked);
+  //const isLiked = await likeService.likeRecipe(authorization, Number(recipeId));
+  //res.status(201).send(isLiked);
+  res.status(201).send("likeRecipe passed!");
 }
 
 export async function getLikes(req: Request, res: Response) {
-  const { authorization } = req.headers;
-  const likedPosts = await likeService.getLikes(authorization);
-  res.status(200).send(likedPosts);
+  //const { authorization } = req.headers;
+  //const likedPosts = await likeService.getLikes(authorization);
+  //res.status(200).send(likedPosts);
+  res.status(200).send("getLikes passed!");
 }

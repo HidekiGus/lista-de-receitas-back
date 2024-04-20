@@ -1,6 +1,6 @@
-import client from '../database/database';
+import { connectToDatabase, Kitten } from '../database/database';
 
-export async function createRecipe(
+/* export async function createRecipe(
   title: string,
   image: string,
   portions: number,
@@ -25,27 +25,48 @@ export async function createRecipe(
     },
   });
   return id;
+} */
+
+export async function createRecipe(
+  title: string,
+  image: string,
+  portions: number,
+  time: number,
+  userId: number
+) {
+  console.log(title, image, portions, time, userId);
+  return true;
 }
 
-export async function createIngredient(ingredient: string, recipeId: number) {
+/* export async function createIngredient(ingredient: string, recipeId: number) {
   await client.ingredients.create({
     data: {
       recipeId,
       description: ingredient,
     },
   });
+} */
+
+export async function createIngredient() {
+  console.log("createIngredient pass");
+  return true;
 }
 
-export async function createMethodStep(method: string, recipeId: number) {
+/* export async function createMethodStep(method: string, recipeId: number) {
   await client.methodSteps.create({
     data: {
       recipeId,
       description: method,
     },
   });
+} */
+
+export async function createMethodStep() {
+  console.log("createMethodStep pass");
+  return true;
 }
 
-export async function findRecipeByUserIdAndTitle(
+/* export async function findRecipeByUserIdAndTitle(
   userId: number,
   title: string
 ) {
@@ -55,17 +76,27 @@ export async function findRecipeByUserIdAndTitle(
       title,
     },
   });
+} */
+
+export async function findRecipeByUserIdAndTitle() {
+  console.log("findRecipeByUserIdAndTitle pass");
+  return true;
 }
 
-export async function getAllRecipes() {
+/* export async function getAllRecipes() {
   return await client.recipes.findMany({
     orderBy: {
       createdAt: 'desc',
     },
   });
+} */
+
+export async function getAllRecipes() {
+  console.log("getAllRecipes pass");
+  return true;
 }
 
-export async function getRecipeById(id: number) {
+/* export async function getRecipeById(id: number) {
   const ingredients = await client.ingredients.findMany({
     where: {
       recipeId: id,
@@ -88,13 +119,24 @@ export async function getRecipeById(id: number) {
     },
   });
   return { ...recipeData, ingredients, method };
+} */
+
+export async function getRecipeById() {
+  console.log("getRecipeById pass");
+  return true;
 }
 
-export async function getLikesByUserId(userId: number, recipeId: number) {
+/* export async function getLikesByUserId(userId: number, recipeId: number) {
   return await client.likes.findMany({
     where: {
       userId,
       recipeId,
     },
   });
+}
+ */
+
+export async function getLikesByUserId() {
+  console.log("getLikesByUserId pass");
+  return true;
 }

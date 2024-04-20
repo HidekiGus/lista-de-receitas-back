@@ -1,7 +1,7 @@
-import client from '../database/database';
+import { client } from '../database/database';
 import { getLikesByUserId } from './recipeRepository';
 
-export async function likeRecipe(userId: number, recipeId: number) {
+/* export async function likeRecipe(userId: number, recipeId: number) {
   const data = await getLikesByUserId(userId, recipeId);
   if (data.length !== 0) {
     await client.likes.delete({
@@ -19,9 +19,14 @@ export async function likeRecipe(userId: number, recipeId: number) {
     });
     return true;
   }
+} */
+
+export async function likeRecipe() {
+  console.log("likeRecipe pass");
+  return true;
 }
 
-export async function getLikedPosts(userId: number) {
+/* export async function getLikedPosts(userId: number) {
   const likes = await client.likes.findMany({ where: { userId } });
   const likedPosts = [];
   for (let i = 0; i < likes.length; i++) {
@@ -31,4 +36,9 @@ export async function getLikedPosts(userId: number) {
   }
   console.log(likedPosts);
   return likedPosts;
+} */
+
+export async function getLikedPosts() {
+  console.log("likedPosts pass");
+  return true;
 }
