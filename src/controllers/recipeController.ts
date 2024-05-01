@@ -2,24 +2,26 @@ import { Request, Response } from 'express';
 import * as recipeService from '../services/recipeService';
 
 export async function createRecipe(req: Request, res: Response) {
-  const { title, image, portions, time, ingredients, method } = req.body;
-  //const { authorization } = req.headers;
+  const { title, image, portions, time, ingredients, method, utensils, userId } = req.body;
+  // const { authorization } = req.headers;
 
-  console.log(req.headers);
   await recipeService.createRecipe(
     title,
     image,
+    ingredients,
+    method,
     portions,
     time,
-    ingredients,
-    method
+    utensils,
+    userId
+    //authorization
   ); //add authorization to the end of this list before checking
   res.sendStatus(201);
 }
 
 export async function getAllRecipes(req: Request, res: Response) {
   //const data = await recipeService.getAllRecipes(req.headers.authorization);
-  const data = "getAllRecipes pass";
+  const data = await recipeService.getAllRecipes();
   res.status(200).send(data);
 }
 

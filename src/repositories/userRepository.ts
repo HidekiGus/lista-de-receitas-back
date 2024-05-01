@@ -1,4 +1,5 @@
 import { connectToDatabase, Kitten, User } from '../database/database';
+import mongoose from 'mongoose';
 
 /* export async function createUser(
   name: string,
@@ -19,16 +20,14 @@ export async function createUser(
   email: string,
   password: string
 ) {
-  console.log("createUser pass");
   await connectToDatabase();
 
   const newUser = new User({ name, email, password });
-
   await newUser.save();
 
   const savedUserId = newUser._id;
   
-
+  mongoose.connection.close();
   return true;
 }
 

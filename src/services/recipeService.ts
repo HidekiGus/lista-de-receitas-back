@@ -1,43 +1,34 @@
 import { resolveJWT } from '../utils/jwtResolver';
 import * as recipeRepository from '../repositories/recipeRepository';
 
-/* export async function createRecipe(
+export async function createRecipe(
   title: string,
   image: string,
-  portions: number,
-  time: number,
   ingredients: string,
   method: string,
-  authorization: string
+  portions: number,
+  time: number,
+  utensils: string[],
+  userId: string
+  //authorization: string
 ) {
-  const token = authorization.replace('Bearer ', '');
-  const userId = await resolveJWT(token);
-  const recipeId = await recipeRepository.createRecipe(
+  //const token = authorization.replace('Bearer ', '');
+  //const userId = await resolveJWT(token);
+  
+  const ingredientList = ingredients.split('\n');
+  const methodList = method.split('\n');
+  const newRecipeId = await recipeRepository.createRecipe(
     title,
     image,
+    ingredientList,
+    methodList,
     Number(portions),
     Number(time),
+    utensils,
     userId
   );
 
-  const ingredientList = ingredients.split('\n');
-  const methodList = method.split('\n');
-  for (let i = 0; i < ingredientList.length; i++) {
-    await recipeRepository.createIngredient(ingredientList[i], recipeId);
-  }
-  for (let m = 0; m < methodList.length; m++) {
-    await recipeRepository.createMethodStep(methodList[m], recipeId);
-  }
-} */
-
-export async function createRecipe(title: string,
-  image: string,
-  portions: number,
-  time: number,
-  ingredients: string,
-  method: string) {
-  console.log("createRecipe pass");
-  return true;
+  return newRecipeId;
 }
 
 /* export async function getAllRecipes(authorization: string) {
@@ -60,7 +51,8 @@ export async function createRecipe(title: string,
 
 export async function getAllRecipes() {
   console.log("getAllRecipes pass");
-  return true;
+  const data = await recipeRepository.get20MostRecentRecipes();
+  return data;
 }
 
 /* export async function getRecipeById(

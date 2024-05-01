@@ -1,4 +1,5 @@
-import { connectToDatabase, Kitten } from '../database/database';
+import { connectToDatabase, Kitten, Recipe } from '../database/database';
+import mongoose from 'mongoose';
 
 /* export async function createRecipe(
   title: string,
@@ -30,40 +31,45 @@ import { connectToDatabase, Kitten } from '../database/database';
 export async function createRecipe(
   title: string,
   image: string,
+  ingredientList: string[],
+  methodList: string[],
   portions: number,
   time: number,
-  userId: number
+  utensils: string[],
+  userId: string
 ) {
-  console.log(title, image, portions, time, userId);
-  return true;
+  await connectToDatabase();
+
+  const newRecipe = new Recipe({
+    title,
+    image, 
+    ingredients: ingredientList, 
+    method: methodList, 
+    portions, 
+    time, 
+    utensils, 
+    userId
+  })
+  await newRecipe.save();
+
+  const savedRecipeId = newRecipe._id;
+
+  mongoose.connection.close();
+  return savedRecipeId;
 }
 
-/* export async function createIngredient(ingredient: string, recipeId: number) {
-  await client.ingredients.create({
-    data: {
-      recipeId,
-      description: ingredient,
-    },
-  });
-} */
-
-export async function createIngredient() {
-  console.log("createIngredient pass");
-  return true;
-}
-
-/* export async function createMethodStep(method: string, recipeId: number) {
-  await client.methodSteps.create({
-    data: {
-      recipeId,
-      description: method,
-    },
-  });
-} */
-
-export async function createMethodStep() {
-  console.log("createMethodStep pass");
-  return true;
+export async function get20MostRecentRecipes() {
+  await connectToDatabase();
+  try {
+    const recipes = await Recipe.find()
+      .sort({ createdAt: -1 }) // Sort by createdAt field in descending order (most recent first)
+      .limit(20); // Limit the result to 20 recipes
+    console.log('Most recent recipes:', recipes);
+    return recipes; // Return the retrieved recipes
+  } catch (err) {
+    console.error('Error retrieving recipes:', err);
+    return []; // Return an empty array in case of an error
+  }
 }
 
 /* export async function findRecipeByUserIdAndTitle(

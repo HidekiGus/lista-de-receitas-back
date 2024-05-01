@@ -14,7 +14,7 @@ async function connectToMongoDB() {
 
 connectToMongoDB(); */
 
-import mongoose from "mongoose";
+import mongoose, { now } from "mongoose";
 
 export async function connectToDatabase() {
     await mongoose.connect(process.env.DATABASE_URL);
@@ -34,3 +34,17 @@ const userSchema = new mongoose.Schema({
 });
 
 export const User = mongoose.model('User', userSchema);
+
+const recipeSchema = new mongoose.Schema({
+    title: String,
+    userId: String, //change to  { type: mongoose.Schema.Types.ObjectId, ref: 'User' } later
+    image: String,
+    portions: Number,
+    time: Number,
+    ingredients: [String],
+    method: [String],
+    likes: { type: Number, default: 0 },
+    createdAt: { type: Date, default: Date.now }
+});
+
+export const Recipe = mongoose.model('Recipe', recipeSchema);
