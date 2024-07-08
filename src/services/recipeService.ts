@@ -1,5 +1,6 @@
 import { resolveJWT } from '../utils/jwtResolver';
 import * as recipeRepository from '../repositories/recipeRepository';
+import mongoose from 'mongoose';
 
 export async function createRecipe(
   title: string,
@@ -71,7 +72,11 @@ export async function getAllRecipes() {
   }
 } */
 
-export async function getRecipeById() {
+export async function getRecipeById(id: string) {
   console.log("getRecipeById pass");
-  return true;
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    throw new Error('ID da receita inválido');
+  }
+  const recipe = await recipeRepository.getRecipeById(id);
+  return recipe;
 }

@@ -28,7 +28,6 @@ export async function getAllRecipes(req: Request, res: Response) {
 export async function getRecipeById(req: Request, res: Response) {
   const { id } = req.params;
   //const { authorization } = req.headers;
-  //const data = await recipeService.getRecipeById(Number(id), authorization);
-  const data = "getRecipeById pass";
+  const data = await recipeService.getRecipeById(id);
   res.status(200).send(data);
 }

@@ -102,7 +102,7 @@ export async function getAllRecipes() {
   return true;
 }
 
-/* export async function getRecipeById(id: number) {
+/* export async function getRecipeById(id: string) {
   const ingredients = await client.ingredients.findMany({
     where: {
       recipeId: id,
@@ -127,9 +127,22 @@ export async function getAllRecipes() {
   return { ...recipeData, ingredients, method };
 } */
 
-export async function getRecipeById() {
-  console.log("getRecipeById pass");
-  return true;
+export async function getRecipeById(id: string) {
+  await connectToDatabase();
+
+  try{
+    const recipe = await Recipe.findById(id);
+
+    if (!recipe) {
+      throw new Error('Receita não encontrada');
+    }
+
+    console.log('Recipe found:', recipe.title);
+    return recipe;
+  } catch(err) {
+    console.error('Error retrieving recipe:', err);
+    return null;
+  }
 }
 
 /* export async function getLikesByUserId(userId: number, recipeId: number) {
